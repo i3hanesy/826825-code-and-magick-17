@@ -52,6 +52,6 @@ window.renderStatistics = function (ctx, players, times) {
       ctx.fillStyle = 'rgba(30, 30, 150,' + Math.random() + ')';
     }
 
-    ctx.fillRect(barX + additionBarX * i, CLOUD_X * 2 + BAR_WIDTH, BAR_WIDTH, - timeHeightBar * times[i]);
+    ctx.fillRect(barX + additionBarX * i, CLOUD_X * 2 + BAR_WIDTH, BAR_WIDTH, -timeHeightBar * times[i]);
   }
 };
