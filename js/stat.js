@@ -12,6 +12,7 @@ var barHeight = CLOUD_HEIGHT - 2 * BETWEEN_WIDTH - TIMES_Y;
 var barX = CLOUD_X + BAR_WIDTH;
 var additionBarX = BAR_WIDTH + BETWEEN_WIDTH;
 var barY = CLOUD_X * 2 + BETWEEN_WIDTH;
+var textVictoryX = CLOUD_X + 2 * GAP;
 
 // Создает облако результатов
 var renderCloud = function (ctx, x, y, color) {
@@ -30,18 +31,18 @@ window.renderStatistics = function (ctx, players, times) {
   // Вызов Облака результатов
   renderCloud(ctx, CLOUD_X, CLOUD_Y, 'white');
 
-  ctx.fillStyle = '#000000';
+  ctx.fillStyle = 'black';
   ctx.font = '16px PT Mono';
   ctx.textBaseline = 'hanging';
-  ctx.fillText('Ура вы победили!', CLOUD_X + 2 * GAP, CLOUD_Y + 2 * GAP);
-  ctx.fillText('Список результатов:', CLOUD_X + 2 * GAP, CLOUD_Y + 4 * GAP);
+  ctx.fillText('Ура вы победили!', textVictoryX, CLOUD_Y + 2 * GAP);
+  ctx.fillText('Список результатов:', textVictoryX, CLOUD_Y + 4 * GAP);
 
   var maxTime = getMaxElement(times);
 
   var timeHeightBar = barHeight / maxTime;
 
   for (var i = 0; i < players.length; i++) {
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = 'black';
     ctx.fillText(players[i], barX + additionBarX * i, barY);
     ctx.fillText(Math.round(times[i]), barX + additionBarX * i, barY - timeHeightBar * times[i] - TIMES_Y);
 
