@@ -9,8 +9,6 @@ var TIMES_Y = 30;
 var BETWEEN_WIDTH = 50;
 var BAR_WIDTH = 40;
 var barHeight = CLOUD_HEIGHT - 2 * BETWEEN_WIDTH - TIMES_Y;
-var barX = CLOUD_X + BAR_WIDTH;
-var additionBarX = BAR_WIDTH + BETWEEN_WIDTH;
 var barY = CLOUD_X * 2 + BETWEEN_WIDTH;
 var textVictoryX = CLOUD_X + 2 * GAP;
 
@@ -39,20 +37,24 @@ window.renderStatistics = function (ctx, players, times) {
 
   var maxTime = getMaxElement(times);
 
-  var timeHeightBar = barHeight / maxTime;
-
   for (var i = 0; i < players.length; i++) {
-    ctx.fillStyle = 'black';
-    ctx.fillText(players[i], barX + additionBarX * i, barY);
-    ctx.fillText(Math.round(times[i]), barX + additionBarX * i, barY - timeHeightBar * times[i] - TIMES_Y);
 
-    if (players[i] === 'Вы') {
+    var barX = CLOUD_X + BAR_WIDTH + (BAR_WIDTH + BETWEEN_WIDTH) * i;
+    var userTimes = times[i];
+    var userName = players[i];
+    var timeHeightBar = barHeight / maxTime * userTimes;
+
+    ctx.fillStyle = 'black';
+    ctx.fillText(userName, barX, barY);
+    ctx.fillText(Math.round(userTimes), barX, barY - timeHeightBar - TIMES_Y);
+
+    if (userName === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
 
       ctx.fillStyle = 'rgba(30, 30, 150,' + Math.random() + ')';
     }
 
-    ctx.fillRect(barX + additionBarX * i, CLOUD_X * 2 + BAR_WIDTH, BAR_WIDTH, -timeHeightBar * times[i]);
+    ctx.fillRect(barX, CLOUD_X * 2 + BAR_WIDTH, BAR_WIDTH, -timeHeightBar);
   }
 };
